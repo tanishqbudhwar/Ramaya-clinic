@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramaya Dentals | Premium Dental Clinic in Rohtak</title>
+    <meta name="description" content="Advanced dental care with modern technology, experienced professionals, and personalized treatment at HUDA Complex, Rohtak.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Alpine.js for Micro-interactions -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .bg-medical-gradient {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased" x-data="{ bookingModal: false, lightbox: false, activeImg: '' }">
+
+    <!-- Preloader Animation -->
+    <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 800)" x-show="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition-opacity duration-500">
+        <div class="flex flex-col items-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600 mb-4"></div>
+            <p class="text-blue-900 font-semibold tracking-wider">RAMAYA DENTALS</p>
+        </div>
+    </div>
+
+    <!-- Floating Sticky Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <!-- Phone Call for Mobile -->
+        <a href="tel:+919896377906" class="md:hidden flex items-center justify-center w-14 h-14 bg-blue-600 text-white rounded-full shadow-xl hover:bg-blue-700 transition transform hover:scale-110">
+            <i class="fa-solid fa-phone text-xl"></i>
+        </a>
+        <!-- WhatsApp Floating Button -->
+        <a href="https://wa.me/919896377906?text=Hi,%20I've%20visited%20your%20website%20and%20want%20to%20book%20an%20appointment." target="_blank" class="flex items-center justify-center w-14 h-14 bg-emerald-500 text-white rounded-full shadow-xl hover:bg-emerald-600 transition transform hover:scale-110">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
+
+    <!-- Sticky Header Navigation -->
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm" x-data="{ mobileMenu: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-tooth text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-tight text-slate-900 block">Ramaya Dentals</span>
+                    <span class="text-xs text-blue-600 font-medium tracking-widest uppercase">Premium Care</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Menu -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+                <a href="#about" class="hover:text-blue-600 transition">About Us</a>
+                <a href="#services" class="hover:text-blue-600 transition">Services</a>
+                <a href="#why-choose-us" class="hover:text-blue-600 transition">Why Us</a>
+                <a href="#gallery" class="hover:text-blue-600 transition">Gallery</a>
+                <a href="#testimonials" class="hover:text-blue-600 transition">Reviews</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://wa.me/919896377906" target="_blank" class="text-slate-700 hover:text-emerald-600 transition flex items-center gap-2 text-sm font-semibold">
+                    <i class="fa-brands fa-whatsapp text-lg text-emerald-500"></i> Chat Now
+                </a>
+                <button @click="bookingModal = true" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-md shadow-blue-200 transition transform hover:-translate-y-0.5">
+                    Book Appointment
+                </button>
+            </div>
+
+            <!-- Hamburger Button -->
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-slate-700 focus:outline-none">
+                <i class="fa-solid" :class="mobileMenu ? 'fa-xmark text-2xl' : 'fa-bars text-xl'"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div x-show="mobileMenu" x-cloak class="md:hidden bg-white border-b border-slate-100 px-4 py-4 space-y-3 shadow-lg absolute w-full left-0">
+            <a href="#about" @click="mobileMenu = false" class="block py-2 text-slate-700 font-medium">About Us</a>
+            <a href="#services" @click="mobileMenu = false" class="block py-2 text-slate-700 font-medium">Services</a>
+            <a href="#why-choose-us" @click="mobileMenu = false" class="block py-2 text-slate-700 font-medium">Why Us</a>
+            <a href="#gallery" @click="mobileMenu = false" class="block py-2 text-slate-700 font-medium">Gallery</a>
+            <a href="#testimonials" @click="mobileMenu = false" class="block py-2 text-slate-700 font-medium">Reviews</a>
+            <div class="pt-4 flex flex-col gap-3">
+                <button @click="bookingModal = true; mobileMenu = false" class="w-full bg-blue-600 text-white text-center py-3 rounded-xl font-semibold">Book Appointment</button>
+                <a href="https://wa.me/919896377906" target="_blank" class="w-full border border-emerald-500 text-emerald-600 text-center py-3 rounded-xl font-semibold flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Contact on WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. Hero Section -->
+    <section class="relative overflow-hidden bg-medical-gradient py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-star"></i> Top Rated Clinic in Rohtak
+                </span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+                    Your Smile, <br class="hidden sm:inline"><span class="text-blue-600">Our Priority</span>
+                </h1>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Advanced dental care with modern technology, experienced professionals, and personalized treatment. Step into a world of pain-free luxury oral care.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <button @click="bookingModal = true" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-base shadow-lg shadow-blue-200 transition transform hover:-translate-y-1">
+                        Book Appointment <i class="fa-solid fa-calendar-check ml-2"></i>
+                    </button>
+                    <a href="https://wa.me/919896377906" target="_blank" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 px-8 py-4 rounded-xl font-bold text-base shadow-sm transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-500 text-xl"></i> Contact on WhatsApp
+                    </a>
+                </div>
+            </div>
+            <!-- Clinic Feature Graphic Frame (Using your reception desk image) -->
+            <div class="lg:col-span-5 relative">
+                <div class="absolute inset-0 bg-blue-400 rounded-3xl transform rotate-3 scale-102 opacity-10 blur-xl"></div>
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img src="img_reception.jpg" alt="Ramaya Dentals Luxury Reception Desk" class="w-full h-[450px] object-cover hover:scale-105 transition duration-700">
+                    <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-4 rounded-xl flex items-center justify-between border border-white/50">
+                        <div>
+                            <p class="text-sm font-bold text-slate-900">Modern Infrastructure</p>
+                            <p class="text-xs text-slate-500">HUDA Complex, Rohtak</p>
+                        </div>
+                        <div class="flex gap-1 text-amber-500 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. About Us Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="relative order-2 lg:order-1">
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="img_clinic_chair.jpg" alt="Advanced Dental Setup" class="rounded-2xl shadow-lg object-cover h-64 w-full mt-8">
+                    <img src="img_treatment_doctor.jpg" alt="Expert Treatment Care" class="rounded-2xl shadow-lg object-cover h-64 w-full">
+                </div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white p-6 rounded-2xl shadow-xl text-center hidden sm:block">
+                    <p class="text-3xl font-extrabold">100%</p>
+                    <p class="text-xs uppercase tracking-wide opacity-90">Hygiene Standard</p>
+                </div>
+            </div>
+            <div class="space-y-6 order-1 lg:order-2">
+                <span class="text-blue-600 font-bold tracking-widest text-xs uppercase">Welcome to Ramaya Dentals</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Redefining High-Quality Dental Treatment with Comfort</h2>
+                <p class="text-slate-600 leading-relaxed text-base">
+                    At Ramaya Dentals, we believe everyone deserves a stellar, highly functional smile. We combine high-quality dental treatments with a strong focus on patient comfort, world-class hygiene standards, and state-of-the-art medical equipment.
+                </p>
+                <div class="space-y-3">
+                    <div class="flex items-start gap-3">
+                        <div class="mt-1 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xs"><i class="fa-solid fa-check"></i></div>
+                        <p class="text-slate-700 font-medium">Personalized consultations designed around your specific goals</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="mt-1 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xs"><i class="fa-solid fa-check"></i></div>
+                        <p class="text-slate-700 font-medium">Warm, friendly clinical staff that alleviates dental anxiety</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="mt-1 w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xs"><i class="fa-solid fa-check"></i></div>
+                        <p class="text-slate-700 font-medium">Strict multi-layered clinical sanitation protocols</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extra Premium Feature: Before/After Smile Slider -->
+    <section class="py-16 bg-slate-100 border-y border-slate-200 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center space-y-4 mb-10">
+            <span class="text-blue-600 font-bold tracking-widest text-xs uppercase">Smile Transformation Gallery</span>
+            <h2 class="text-3xl font-extrabold text-slate-900">Witness the Transformations</h2>
+            <p class="text-slate-500">Drag the slider to see the premium results delivered by our cosmetic surgical expertise.</p>
+        </div>
+        <div class="max-w-xl mx-auto">
+            <!-- Interlocking Slide Frame Container -->
+            <div class="relative w-full h-80 rounded-2xl overflow-hidden shadow-xl select-none" x-data="{ width: 50 }" @mousemove.window="if($el.dataset.dragging == 'true') { const rect = $el.getBoundingClientRect(); width = Math.max(0, Math.min(100, (($event.clientX - rect.left) / rect.width) * 100)) }" @mouseup.window="$el.dataset.dragging = 'false'" @mouseleave.window="$el.dataset.dragging = 'false'">
+                <!-- Before Face Image -->
+                <img src="img_implant_before_placeholder.jpg" alt="Before Treatment" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute top-3 left-3 bg-slate-900/70 text-white text-xs px-2.5 py-1 rounded font-bold uppercase tracking-wider">Before</div>
+                
+                <!-- After Face Image Layer -->
+                <div class="absolute inset-y-0 right-0 left-0 overflow-hidden" :style="'left: ' + width + '%'">
+                    <img src="img_implant_after.jpg" alt="After Implant Treatment" class="absolute inset-0 w-full h-full object-cover max-w-none" :style="'width: ' + $el.parentElement.clientWidth + 'px; left: -' + (($el.parentElement.clientWidth * width)/100) + 'px'">
+                    <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs px-2.5 py-1 rounded font-bold uppercase tracking-wider">After</div>
+                </div>
+
+                <!-- Slider Divider Control Bar -->
+                <div class="absolute inset-y-0 bottom-0 top-0 w-1 bg-white cursor-ew-resize flex items-center justify-center" :style="'left: ' + width + '%'" @mousedown="$el.parentElement.dataset.dragging = 'true'">
+                    <div class="w-8 h-8 bg-blue-600 rounded-full border-2 border-white text-white flex items-center justify-center shadow-lg pointer-events-none">
+                        <i class="fa-solid fa-arrows-left-right text-xs"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Services Section -->
+    <section id="services" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center space-y-4 mb-16">
+            <span class="text-blue-600 font-bold tracking-widest text-xs uppercase">Comprehensive Clinical Suite</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Advanced Dental Treatments Provided</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Service Card Template -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-hand-holding-medical"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Teeth Cleaning</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Advanced scaling and polishing procedures targeting plaque and deep staining.</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-tooth"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Root Canal Treatment</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Precision endodontic care using automated rotary systems for absolute pain-relief.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-cubes"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Dental Implants</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Permanent missing tooth replacement matching natural anatomical structure perfectly.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-teeth-open"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Braces / Orthodontics</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Traditional bracket lines and modern invisible aligners for structural bite corrections.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Teeth Whitening</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Premium laser whitening treatments boosting target enamel shade dynamically in an hour.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-face-smile"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Smile Makeover</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Custom structural design using aesthetic veneers, reshaping treatments, and contours.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-scissors"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Tooth Extraction</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Atraumatic, painless emergency structural tooth extractions and wisdom teeth care.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                    <i class="fa-solid fa-child"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Pediatric Dentistry</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Specialized, friendly, hyper-gentle oral care and cavity prevention tracking for children.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Why Choose Us Section -->
+    <section id="why-choose-us" class="py-20 bg-blue-900 text-white px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-blue-300 font-bold tracking-widest text-xs uppercase">The Clinical Advantage</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Why Elite Patient Experience Chooses Us</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex gap-4 p-4 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="w-12 h-12 shrink-0 rounded-xl bg-white/10 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-user-doctor"></i></div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1">Experienced Dentists</h3>
+                        <p class="text-sm text-blue-100/80 leading-relaxed">Expert surgeons with highly validated treatment histories spanning intricate clinical configurations.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-4 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="w-12 h-12 shrink-0 rounded-xl bg-white/10 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-microscope"></i></div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1">Modern Equipment</h3>
+                        <p class="text-sm text-blue-100/80 leading-relaxed">Equipped with automated, pain-reducing machinery and intraoral scanning diagnostic modules.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-4 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="w-12 h-12 shrink-0 rounded-xl bg-white/10 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-wallet"></i></div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1">Affordable Treatment</h3>
+                        <p class="text-sm text-blue-100/80 leading-relaxed">Transparent premium dental treatments structured cleanly with zero hidden clinical bills.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-4 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="w-12 h-12 shrink-0 rounded-xl bg-white/10 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-kit-medical"></i></div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1">Pain-Free Procedures</h3>
+                        <p class="text-sm text-blue-100/80 leading-relaxed">Advanced anesthetics techniques designed to remove operational panic entirely.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-4 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="w-12 h-12 shrink-0 rounded-xl bg-white/10 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-pump-medical"></i></div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1">Hygienic Environment</h3>
+                        <p class="text-sm text-blue-100/80 leading-relaxed">Continuous clinical operational space cleaning mirroring world hospital safety guidelines.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-4 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="w-12 h-12 shrink-0 rounded-xl bg-white/10 flex items-center justify-center text-blue-300 text-xl"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1">Personalized Care</h3>
+                        <p class="text-sm text-blue-100/80 leading-relaxed">No rushed sessions. We focus fully on tracking your smile roadmap from consult to followups.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Gallery Section (Grid Layout with Dynamic Lightbox Preview) -->
+    <section id="gallery" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center space-y-4 mb-16">
+            <span class="text-blue-600 font-bold tracking-widest text-xs uppercase">Inside the Clinic</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Our Visual Practice Gallery</h2>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <!-- Gallery Images matching the provided structures -->
+            <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-100 cursor-zoom-in group" @click="activeImg='img_reception.jpg'; lightbox=true">
+                <img src="img_reception.jpg" alt="Ramaya Reception Counter" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-100 cursor-zoom-in group" @click="activeImg='img_clinic_chair.jpg'; lightbox=true">
+                <img src="img_clinic_chair.jpg" alt="Operational Operatory Chair Area" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-100 cursor-zoom-in group" @click="activeImg='img_child_patient.jpg'; lightbox=true">
+                <img src="img_child_patient.jpg" alt="Happy Pediatric Patient Smiling" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-100 cursor-zoom-in group" @click="activeImg='img_doctor_selfie.jpg'; lightbox=true">
+                <img src="img_doctor_selfie.jpg" alt="Friendly Pediatric Consultant Specialist" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-100 cursor-zoom-in group" @click="activeImg='img_surgery_procedure.jpg'; lightbox=true">
+                <img src="img_surgery_procedure.jpg" alt="Advanced Clinical Surgical Isolation Attire" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-100 cursor-zoom-in group" @click="activeImg='img_patient_smile.jpg'; lightbox=true">
+                <img src="img_patient_smile.jpg" alt="Satisfied Post Treatment Patient Visit" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+            </div>
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div x-show="lightbox" x-cloak class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4" @click="lightbox=false" x-transition>
+            <button class="absolute top-6 right-6 text-white text-3xl hover:text-slate-300">&times;</button>
+            <img :src="activeImg" alt="Preview Larger Frame View" class="max-w-full max-h-[85vh] rounded-xl shadow-2xl border-2 border-white/20">
+        </div>
+    </section>
+
+    <!-- 8. Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-slate-100 border-y border-slate-200 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-blue-600 font-bold tracking-widest text-xs uppercase">Patient Diaries</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">What Our Patients Say</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial Card -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60 relative">
+                    <div class="text-blue-200 text-5xl absolute top-4 right-6 font-serif">“</div>
+                    <div class="flex gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed italic mb-6">
+                        "Got my root canal done here last month. I was terrified of dental pain, but the doctor made sure I felt absolutely nothing. Extremely professional and hygienic clinic in Rohtak."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full font-bold text-blue-700 text-sm flex items-center justify-center">AK</div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-900">Aman Kumar</p>
+                            <p class="text-xs text-slate-400">Patient</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60 relative">
+                    <div class="text-blue-200 text-5xl absolute top-4 right-6 font-serif">“</div>
+                    <div class="flex gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed italic mb-6">
+                        "Ramaya Dentals is highly recommended for kids. Took my daughter for teeth cleaning; the staff treated her with extreme patience and gentle care. The ambience is premium and welcoming."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-pink-100 rounded-full font-bold text-pink-700 text-sm flex items-center justify-center">PS</div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-900">Pooja Sharma</p>
+                            <p class="text-xs text-slate-400">Mother</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/60 relative">
+                    <div class="text-blue-200 text-5xl absolute top-4 right-6 font-serif">“</div>
+                    <div class="flex gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed italic mb-6">
+                        "Unmatched aesthetic alignment quality! The cosmetic smile makeover mapping was completely explained before starting. Thrilled with how my veneers turned out."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-emerald-100 rounded-full font-bold text-emerald-700 text-sm flex items-center justify-center">RG</div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-900">Rahul Gupta</p>
+                            <p class="text-xs text-slate-400">Consultation Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extra Premium Feature: FAQ Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div class="text-center space-y-4 mb-12">
+            <span class="text-blue-600 font-bold tracking-widest text-xs uppercase">Have Questions?</span>
+            <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+        </div>
+        <div class="space-y-4" x-data="{ activeFaq: null }">
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                <button @click="activeFaq = (activeFaq === 1 ? null : 1)" class="w-full text-left px-6 py-4 font-semibold text-slate-900 flex justify-between items-center bg-slate-50/50 hover:bg-slate-50 transition">
+                    <span>How can I schedule an emergency treatment booking?</span>
+                    <i class="fa-solid" :class="activeFaq === 1 ? 'fa-minus text-blue-600' : 'fa-plus text-slate-400'"></i>
+                </button>
+                <div x-show="activeFaq === 1" x-cloak class="px-6 py-4 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+                    You can schedule using our on-page booking module instantly, or click the floating WhatsApp link to get connected with our reception staff directly for real-time emergency triage coordination.
+                </div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                <button @click="activeFaq = (activeFaq === 2 ? null : 2)" class="w-full text-left px-6 py-4 font-semibold text-slate-900 flex justify-between items-center bg-slate-50/50 hover:bg-slate-50 transition">
+                    <span>What sterilization steps are maintained inside the facility?</span>
+                    <i class="fa-solid" :class="activeFaq === 2 ? 'fa-minus text-blue-600' : 'fa-plus text-slate-400'"></i>
+                </button>
+                <div x-show="activeFaq === 2" x-cloak class="px-6 py-4 text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+                    We follow a rigorous, clinical sterilization chain process using digital autoclaves, single-use diagnostic disposable packages, and thorough room chemical sanitation after every clinical case.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Contact Section & 7. Maps Integration Wrapper -->
+    <section id="contact" class="bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2">
+            <!-- Left Panel: Context Data -->
+            <div class="p-8 sm:p-12 lg:p-16 space-y-8">
+                <div>
+                    <span class="text-blue-600 font-bold tracking-widest text-xs uppercase">Connect Instantly</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Get in Touch With Us</h2>
+                    <p class="text-slate-500 mt-2">We are available across social networks, digital booking records, and location lines.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-lg shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <p class="font-bold text-slate-900">Clinic Location Address</p>
+                            <p class="text-sm text-slate-600 mt-0.5">SCF-41, Ground Floor, Near State Bank, HUDA Complex, Rohtak, Haryana 124001, India</p>
+                            <a href="https://maps.google.com/?q=SCF-41,+HUDA+Complex,+Rohtak" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 uppercase tracking-wider mt-2 transition">Get Directions <i class="fa-solid fa-arrow-turn-up text-[10px]"></i></a>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-lg shrink-0"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <p class="font-bold text-slate-900">Phone Call / WhatsApp Line</p>
+                            <p class="text-sm text-slate-600 mt-0.5">+91 98963 77906</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 bg-pink-50 border border-pink-100 rounded-xl flex items-center justify-center text-pink-600 text-lg shrink-0"><i class="fa-brands fa-instagram"></i></div>
+                        <div>
+                            <p class="font-bold text-slate-900">Official Instagram Profile</p>
+                            <a href="https://www.instagram.com/ramayadentals/" target="_blank" class="text-sm text-blue-600 hover:underline mt-0.5 block">@ramayadentals</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Google Maps Frame -->
+            <div class="w-full min-h-[350px] bg-slate-100 relative">
+                <!-- Embedded Interactive Map Pointer Mock -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3493.570220235338!2d76.6119567!3d28.8962294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d8516035eb4cb%3A0xe54e6fc270ebc64f!2sHUDA%20Complex%2C%20Rohtak!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" class="w-full h-full min-h-[400px] border-none" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Appointment Booking System Modal -->
+    <div x-show="bookingModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4" x-transition>
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100 max-h-[90vh] overflow-y-auto" @click.away="bookingModal = false">
+            <button @click="bookingModal = false" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-2xl font-semibold">&times;</button>
+            
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-slate-900">Schedule Clinical Visit</h3>
+                <p class="text-xs text-slate-500 mt-1">Fill out the clinical intake form below to secure your preferential window validation.</p>
+            </div>
+
+            <!-- Booking form setup with custom form routing data placeholder fields -->
+            <form x-data="{
+                fullName: '', phone: '', email: '', date: '', time: '', treatment: '', msg: '',
+                successMsg: false,
+                submitForm() {
+                    if(!this.fullName || !this.phone || !this.date) { alert('Please fill required structural inputs.'); return; }
+                    this.successMsg = true;
+                    setTimeout(() => { this.successMsg = false; bookingModal = false; }, 4000);
+                }
+            }" @submit.prevent="submitForm()" class="space-y-4">
+                
+                <div x-show="successMsg" x-cloak class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-xl text-sm font-medium text-center">
+                    <i class="fa-solid fa-circle-check text-emerald-600 mr-2 text-base"></i> Appointment request received! Our clinical desks will call back to confirm.
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Full Name *</label>
+                    <input type="text" x-model="fullName" required placeholder="John Doe" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Phone Number *</label>
+                        <input type="tel" x-model="phone" required placeholder="+91 99999 99999" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Email Address</label>
+                        <input type="email" x-model="email" placeholder="john@example.com" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Preferred Date *</label>
+                        <input type="date" x-model="date" required class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition text-slate-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Preferred Time *</label>
+                        <select x-model="time" required class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition text-slate-600">
+                            <option value="">Select slot...</option>
+                            <option value="10am-12pm">Morning (10:00 AM - 12:00 PM)</option>
+                            <option value="12pm-3pm">Afternoon (12:00 PM - 03:00 PM)</option>
+                            <option value="3pm-7pm">Evening (03:00 PM - 07:00 PM)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Treatment Type</label>
+                    <select x-model="treatment" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition text-slate-600">
+                        <option value="">Select clinical service...</option>
+                        <option value="Teeth Cleaning">Teeth Cleaning</option>
+                        <option value="Root Canal">Root Canal Treatment</option>
+                        <option value="Implants">Dental Implants</option>
+                        <option value="Braces">Braces / Orthodontics</option>
+                        <option value="Whitening">Teeth Whitening</option>
+                        <option value="Smile Makeover">Smile Makeover</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Message / Medical Notes</label>
+                    <textarea rows="3" x-model="msg" placeholder="Any specific requirements or pain symptoms..." class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition"></textarea>
+                </div>
+                
+                <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-md shadow-blue-200">
+                        Confirm Clinical Booking
+                    </button>
+                    <!-- Alternate direct routing WhatsApp workflow option built-in -->
+                    <a href="#" @click.prevent="window.open('https://wa.me/919896377906?text=Appointment%20Request%0AName:%20'+fullName+'%0APhone:%20'+phone+'%0ADate:%20'+date+'%0ATreatment:%20'+treatment, '_blank')" class="w-full border border-emerald-500 text-emerald-600 hover:bg-emerald-50 text-center font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Book via WhatsApp
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 10. Footer Section Area -->
+    <footer class="bg-slate-900 text-slate-400 text-sm border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3 text-white">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-base"><i class="fa-solid fa-tooth"></i></div>
+                    <span class="text-lg font-bold tracking-tight">Ramaya Dentals</span>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Premium practice infrastructure delivering elite oral diagnostics and clinical treatment structures across continuous health lines.
+                </p>
+                <div class="flex gap-4 pt-2">
+                    <a href="https://www.instagram.com/ramayadentals/" target="_blank" class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center text-white hover:bg-pink-600 transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/919896377906" target="_blank" class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center text-white hover:bg-emerald-600 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <p class="text-white font-bold mb-4 tracking-wide uppercase text-xs">Quick Links</p>
+                <div class="space-y-2 text-xs flex flex-col">
+                    <a href="#" class="hover:text-white transition">Home Banner</a>
+                    <a href="#about" class="hover:text-white transition">About Practice</a>
+                    <a href="#why-choose-us" class="hover:text-white transition">Why Choose Us</a>
+                    <a href="#gallery" class="hover:text-white transition">Clinic Gallery</a>
+                    <a href="#contact" class="hover:text-white transition">Contact Portal</a>
+                </div>
+            </div>
+            <div>
+                <p class="text-white font-bold mb-4 tracking-wide uppercase text-xs">Services</p>
+                <div class="space-y-2 text-xs flex flex-col">
+                    <a href="#services" class="hover:text-white transition">Teeth Cleaning</a>
+                    <a href="#services" class="hover:text-white transition">Root Canal Treatment</a>
+                    <a href="#services" class="hover:text-white transition">Dental Implants</a>
+                    <a href="#services" class="hover:text-white transition">Braces / Orthodontics</a>
+                    <a href="#services" class="hover:text-white transition">Teeth Whitening</a>
+                </div>
+            </div>
+            <div>
+                <p class="text-white font-bold mb-4 tracking-wide uppercase text-xs">Contact Info</p>
+                <p class="text-xs leading-relaxed text-slate-400 mb-2">
+                    SCF-41, Ground Floor, Near State Bank, HUDA Complex, Rohtak, Haryana 124001, India
+                </p>
+                <p class="text-xs font-bold text-white">Call: +91 98963 77906</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 Ramaya Dentals. All Rights Reserved.</p>
+            <p class="tracking-wide">Designed for Premium Patient Healthcare Experiences</p>
+        </div>
+    </footer>
+
+</body>
+</html>
